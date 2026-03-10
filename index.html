@@ -3,18 +3,30 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>JC.DATA.SOLUTIONS</title>
-    <script src="[https://cdn.tailwindcss.com](https://cdn.tailwindcss.com)"></script>
+    <title>JC.DATA.SOLUTIONS | Expert Excel VBA & IA</title>
+    
+    <!-- Chargement de Tailwind CSS pour le design -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Importation de la police Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    
+    <style>
+      body { 
+        font-family: 'Inter', sans-serif; 
+        margin: 0; 
+        padding: 0; 
+        background-color: #f8fafc; 
+      }
+    </style>
   </head>
   <body>
+    <!-- Zone où React va injecter votre site -->
     <div id="root"></div>
-    <script type="module">
-      import React from 'react'
-      import ReactDOM from 'react-dom/client'
-      import App from './App.jsx'
-      ReactDOM.createRoot(document.getElementById('root')).render(
-        React.createElement(React.StrictMode, null, React.createElement(App))
-      )
-    </script>
+    
+    <!-- Lien vers le moteur du site -->
+    <script type="module" src="/main.jsx"></script>
   </body>
 </html>
