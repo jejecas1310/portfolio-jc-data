@@ -6,7 +6,7 @@ import {
   BarChart3, Zap, FileSpreadsheet, Database, ArrowRight, CheckCircle2, 
   Mail, Linkedin, Menu, X, PieChart, TrendingUp, Activity, Sparkles, 
   Loader2, ShoppingBag, UserCheck, ArrowLeft, Settings, ShieldCheck, 
-  Layers, Layout, AlertCircle, Timer, Send, Lock, Trash2, Calendar, Info, Gift
+  Layers, Layout, AlertCircle, Timer, Send, Lock, Trash2, Calendar, Info, Gift, Star, Quote
 } from 'lucide-react';
 
 // --- CONFIGURATION FIREBASE ---
@@ -42,13 +42,18 @@ const projects = [
   { title: "Outil de Pricing", impact: "+15% de réactivité", description: "Calculateur de devis intelligent avec interface de saisie sécurisée." }
 ];
 
+const testimonials = [
+  { name: "Marc D.", role: "Directeur Financier", content: "Jérôme a transformé un processus qui nous prenait 2 jours en un clic de 30 secondes. Un gain de productivité inestimable.", rating: 5 },
+  { name: "Sophie L.", role: "Responsable RH", content: "Expertise technique impressionnante sur VBA. L'outil livré est robuste et très facile à prendre en main par mon équipe.", rating: 5 },
+  { name: "Thomas V.", role: "CEO Start-up", content: "Réactif et pédagogue. Il ne se contente pas de coder, il optimise réellement la logique métier de nos fichiers.", rating: 5 }
+];
+
 const App = () => {
   const [currentPage, setCurrentPage] = useState('home'); 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [user, setUser] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [aiMode, setAiMode] = useState('audit');
   const [userInput, setUserInput] = useState("");
   const [aiResult, setAiResult] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -62,7 +67,6 @@ const App = () => {
 
   const apiKey = ""; 
 
-  // --- LOGIQUE AUTH & FIREBASE ---
   useEffect(() => {
     if (!auth) return;
     const initAuth = async () => {
@@ -159,7 +163,7 @@ const App = () => {
   const ServiceCard = ({ icon: Icon, title, desc, onClick, color }) => (
     <div className={`p-8 rounded-3xl border border-${color}-100 bg-${color}-50/30 hover:bg-white hover:shadow-xl transition-all group text-left h-full flex flex-col`}>
       <div className={`mb-6 group-hover:scale-110 transition-transform text-${color}-500`}><Icon size={32} /></div>
-      <h3 className="text-xl font-bold text-slate-900 mb-4 tracking-tight">{title}</h3>
+      <h3 className="text-xl font-bold text-slate-900 mb-4 tracking-tight uppercase">{title}</h3>
       <p className="text-slate-600 text-sm leading-relaxed mb-6 flex-grow">{desc}</p>
       <button onClick={onClick} className={`flex items-center gap-2 text-${color}-600 font-bold text-xs uppercase tracking-widest`}>Découvrir <ArrowRight size={16} /></button>
     </div>
@@ -175,26 +179,19 @@ const App = () => {
             <span className="text-xl font-black tracking-tighter uppercase italic text-slate-900">JC.DATA<span className="text-emerald-600">.SOLUTIONS</span></span>
           </div>
           <div className="hidden md:flex items-center gap-8 text-sm">
-            {['Services', 'Micro-Services', 'Réalisations', 'Contact'].map((n, i) => (
-              <button key={i} onClick={() => navigateToSection(['services', 'comeup', 'portfolio', 'contact'][i])} className="text-slate-600 hover:text-emerald-600 transition-colors font-bold uppercase">{n}</button>
+            {['Services', 'Micro-Services', 'Réalisations', 'Témoignages', 'Contact'].map((n, i) => (
+              <button key={i} onClick={() => navigateToSection(['services', 'comeup', 'portfolio', 'testimonials', 'contact'][i])} className="text-slate-600 hover:text-emerald-600 transition-colors font-bold uppercase">{n}</button>
             ))}
-            <button onClick={() => { setAiMode('audit'); setIsModalOpen(true); }} className="bg-emerald-600 text-white px-5 py-2.5 rounded-full hover:bg-emerald-700 transition-all shadow-lg flex items-center gap-2 font-black">Audit IA ✨</button>
+            <button onClick={() => { setIsModalOpen(true); }} className="bg-emerald-600 text-white px-5 py-2.5 rounded-full hover:bg-emerald-700 transition-all shadow-lg flex items-center gap-2 font-black">Audit IA ✨</button>
           </div>
           <button className="md:hidden" onClick={() => setIsMenuOpen(!isMenuOpen)}>{isMenuOpen ? <X /> : <Menu />}</button>
         </div>
-        {isMenuOpen && (
-          <div className="md:hidden absolute top-full left-0 w-full bg-white border-t p-6 flex flex-col gap-4 shadow-xl text-left">
-             {['Services', 'Micro-Services', 'Réalisations', 'Contact'].map((n, i) => (
-              <button key={i} onClick={() => navigateToSection(['services', 'comeup', 'portfolio', 'contact'][i])} className="text-left py-2 font-bold border-b border-slate-50 uppercase text-xs tracking-widest">{n}</button>
-            ))}
-            <button onClick={() => { setIsModalOpen(true); setIsMenuOpen(false); }} className="bg-emerald-600 text-white py-4 rounded-xl font-black mt-2">Audit IA ✨</button>
-          </div>
-        )}
       </nav>
 
       {currentPage === 'admin' ? (
         <div className="pt-32 pb-24 min-h-screen max-w-6xl mx-auto px-6 text-left">
           <button onClick={() => setCurrentPage('home')} className="mb-8 flex items-center gap-2 text-slate-500 font-bold"><ArrowLeft size={16} /> Retour site</button>
+          <h1 className="text-4xl font-black mb-8 italic uppercase text-slate-900">Tableau de Bord Admin</h1>
           {!isAdminAuthenticated ? (
             <div className="max-w-md mx-auto bg-white p-12 rounded-[2.5rem] shadow-xl text-center">
               <Lock className="mx-auto mb-6 text-emerald-600" size={48} />
@@ -206,11 +203,11 @@ const App = () => {
             </div>
           ) : (
             <div className="space-y-8">
-              <h1 className="text-4xl font-black uppercase italic">Prospects ({leads.length})</h1>
+              <h2 className="text-2xl font-bold">Prospects ({leads.length})</h2>
               <div className="grid gap-6">
                 {leads.map((l) => (
-                  <div key={l.id} className="bg-white p-8 rounded-3xl border border-slate-100 shadow-sm text-left relative group">
-                    <h3 className="text-xl font-bold text-slate-900">{l.name}</h3>
+                  <div key={l.id} className="bg-white p-8 rounded-3xl border border-slate-100 shadow-sm text-left">
+                    <h3 className="text-xl font-bold">{l.name}</h3>
                     <div className="text-emerald-600 text-sm mb-4 font-bold">{l.email}</div>
                     <p className="text-slate-600 bg-slate-50 p-4 rounded-xl italic">"{l.message}"</p>
                   </div>
@@ -229,9 +226,9 @@ const App = () => {
                 <div>
                   <h1 className="text-5xl lg:text-7xl font-extrabold text-slate-900 leading-[1.1] mb-8 font-black uppercase tracking-tight">Optimisez vos données avec <span className="text-emerald-600">JC.DATA.SOLUTIONS</span></h1>
                   <p className="text-xl text-slate-600 mb-10 leading-relaxed max-w-2xl">Expert Excel VBA & IA. Automatisez vos tâches pour gagner des heures chaque semaine.</p>
-                  <button onClick={() => { setAiMode('audit'); setIsModalOpen(true); }} className="bg-emerald-600 text-white px-8 py-4 rounded-xl font-bold hover:bg-emerald-700 transition-all shadow-lg inline-flex items-center gap-2">Audit IA Gratuit ✨ <ArrowRight size={20} /></button>
+                  <button onClick={() => { setIsModalOpen(true); }} className="bg-emerald-600 text-white px-8 py-4 rounded-xl font-bold hover:bg-emerald-700 transition-all shadow-lg inline-flex items-center gap-2">Audit IA Gratuit ✨ <ArrowRight size={20} /></button>
                 </div>
-                <div className="hidden lg:block">
+                <div className="hidden lg:block text-center">
                   <div className="relative bg-white rounded-[2.5rem] shadow-2xl border border-slate-100 p-8 transform rotate-2 inline-block">
                     <div className="grid grid-cols-2 gap-4">
                       <div className="bg-emerald-50 rounded-2xl p-6 text-center text-slate-900">
@@ -252,10 +249,10 @@ const App = () => {
 
             {/* SERVICES */}
             <section id="services" className="py-24 bg-slate-50 scroll-mt-20">
-              <div className="max-w-7xl mx-auto px-6 text-center">
+              <div className="max-w-7xl mx-auto px-6 text-center text-slate-900">
                 <div className="max-w-2xl mx-auto mb-16">
                   <h2 className="text-base font-bold text-emerald-600 uppercase tracking-widest mb-3 italic">Expertises & Services</h2>
-                  <p className="text-3xl lg:text-4xl font-bold italic text-slate-900">Des solutions sur mesure pour votre performance.</p>
+                  <p className="text-3xl lg:text-4xl font-bold italic">Des solutions sur mesure pour votre performance.</p>
                 </div>
                 <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
                   <ServiceCard icon={Zap} title="Automatisation" desc="Éliminez les tâches répétitives via VBA." onClick={() => setCurrentPage('details-automation')} color="emerald" />
@@ -271,8 +268,8 @@ const App = () => {
               <div className="max-w-7xl mx-auto px-6 relative z-10">
                 <div className="mb-16">
                   <div className="inline-flex items-center gap-2 bg-amber-500 text-slate-900 px-4 py-1.5 rounded-full text-xs font-black uppercase mb-6 animate-pulse"><Timer size={14} /> Livraison express disponible</div>
-                  <h2 className="text-base font-bold text-amber-400 uppercase tracking-widest mb-3 italic">Offres Packagées</h2>
-                  <p className="text-3xl lg:text-5xl font-black mb-6 uppercase tracking-tighter">Micro-Services ComeUp</p>
+                  <h2 className="text-base font-bold text-amber-400 uppercase tracking-widest mb-3 italic text-center">Offres Packagées</h2>
+                  <p className="text-3xl lg:text-5xl font-black mb-6 uppercase tracking-tighter text-center">Micro-Services ComeUp</p>
                   <p className="text-slate-400 max-w-2xl mx-auto border-l-4 border-amber-400 pl-6 text-left italic">Prestations standardisées accessibles directement sur la plateforme ComeUp.</p>
                 </div>
                 <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6 text-left text-slate-900">
@@ -293,11 +290,11 @@ const App = () => {
             </section>
 
             {/* RÉALISATIONS (PORTFOLIO) */}
-            <section id="portfolio" className="py-24 bg-white scroll-mt-20 text-center">
+            <section id="portfolio" className="py-24 bg-white scroll-mt-20">
               <div className="max-w-7xl mx-auto px-6">
-                <div className="mb-16">
-                  <h2 className="text-base font-bold text-emerald-600 uppercase tracking-widest mb-3 italic text-center">Portfolio</h2>
-                  <p className="text-3xl lg:text-4xl font-bold text-center italic text-slate-900">Mes Réalisations Clients</p>
+                <div className="mb-16 text-center">
+                  <h2 className="text-base font-bold text-emerald-600 uppercase tracking-widest mb-3 italic">Portfolio</h2>
+                  <p className="text-3xl lg:text-4xl font-bold italic text-slate-900">Mes Réalisations Clients</p>
                 </div>
                 <div className="grid md:grid-cols-3 gap-8 text-left">
                   {projects.map((p, i) => (
@@ -309,6 +306,34 @@ const App = () => {
                   ))}
                 </div>
               </div>
+            </section>
+
+            {/* TÉMOIGNAGES (NOUVELLE SECTION) */}
+            <section id="testimonials" className="py-24 bg-emerald-600 scroll-mt-20 text-white overflow-hidden relative">
+               <div className="absolute top-0 left-0 p-12 opacity-10"><Quote size={120} /></div>
+               <div className="max-w-7xl mx-auto px-6 relative z-10">
+                 <div className="text-center mb-16">
+                    <h2 className="text-base font-bold text-emerald-100 uppercase tracking-widest mb-3 italic">Confiance</h2>
+                    <p className="text-3xl lg:text-5xl font-black italic tracking-tight uppercase">Ils me font confiance</p>
+                 </div>
+                 <div className="grid md:grid-cols-3 gap-8">
+                    {testimonials.map((t, i) => (
+                      <div key={i} className="bg-white rounded-[2.5rem] p-10 shadow-2xl transform hover:-translate-y-2 transition-all duration-300">
+                        <div className="flex gap-1 mb-6">
+                          {[...Array(t.rating)].map((_, i) => <Star key={i} size={18} className="fill-amber-400 text-amber-400" />)}
+                        </div>
+                        <p className="text-slate-700 italic text-lg leading-relaxed mb-10 text-left">"{t.content}"</p>
+                        <div className="flex items-center gap-4 border-t border-slate-100 pt-8">
+                          <div className="w-12 h-12 bg-emerald-100 rounded-2xl flex items-center justify-center text-emerald-600 font-black text-xl italic">{t.name[0]}</div>
+                          <div className="text-left">
+                            <div className="font-black text-slate-900 text-lg uppercase tracking-tighter">{t.name}</div>
+                            <div className="text-emerald-600 text-xs font-bold uppercase tracking-widest">{t.role}</div>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                 </div>
+               </div>
             </section>
           </>
         ) : (
@@ -335,7 +360,7 @@ const App = () => {
                   <div className="h-1.5 w-32 bg-slate-200 rounded-full overflow-hidden">
                     <div className="h-full bg-emerald-500 transition-all duration-700" style={{ width: `${(aiUsageCount/3)*100}%` }}></div>
                   </div>
-                  <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest">{aiUsageCount}/3 essais gratuits</span>
+                  <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest text-left">{aiUsageCount}/3 essais gratuits</span>
                 </div>
               </div>
               <button onClick={() => setIsModalOpen(false)} className="p-2 hover:bg-slate-100 rounded-full text-slate-400 transition-colors"><X size={24} /></button>
@@ -351,7 +376,7 @@ const App = () => {
                   </div>
                 ) : (
                   <div className="space-y-4">
-                    <div className="flex items-center gap-2 text-emerald-600 font-bold text-xs uppercase tracking-widest mb-2"><Info size={14}/> Décrivez un processus métier</div>
+                    <div className="flex items-center gap-2 text-emerald-600 font-bold text-xs uppercase tracking-widest mb-2"><Info size={14}/> Décrivez un processus à automatiser</div>
                     <textarea value={userInput} onChange={(e) => setUserInput(e.target.value)} className="w-full p-6 bg-slate-50 border-2 border-slate-100 rounded-2xl focus:border-emerald-500 outline-none text-lg min-h-[160px]" placeholder="Ex: Chaque lundi, je fusionne 10 fichiers..."></textarea>
                     <button onClick={handleAiAction} disabled={isLoading || !userInput.trim()} className="w-full bg-slate-900 text-white py-5 rounded-2xl font-black text-lg hover:bg-emerald-600 transition-all flex items-center justify-center gap-3 shadow-lg">{isLoading ? <Loader2 className="animate-spin" /> : <><Sparkles size={20} /> Analyser mon besoin</>}</button>
                   </div>
