@@ -33,14 +33,16 @@ const methodology = [
 // --- 2. CONFIGURATION FIREBASE ---
 // ÉTAPE CRUCIALE : Vous devez remplir ces valeurs avec vos vraies clés Firebase 
 // pour que les boutons Admin fonctionnent sur votre site en ligne.
-const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : {
-  apiKey: "", 
-  authDomain: "",
-  projectId: "",
-  storageBucket: "",
-  messagingSenderId: "",
-  appId: ""
+const firebaseConfig = {
+  apiKey: "AIzaSyDCWwRpxGR5QqK-vjT-DzJavFoyJBJ7J8M",
+  authDomain: "jcdatasolutions-745d2.firebaseapp.com",
+  projectId: "jcdatasolutions-745d2",
+  storageBucket: "jcdatasolutions-745d2.firebasestorage.app",
+  messagingSenderId: "65737454350",
+  appId: "1:65737454350:web:0364b0282b2579792e1d5f",
+  measurementId: "G-KQM1VHWG84"
 };
+
 
 const app = (firebaseConfig.apiKey) ? (!getApps().length ? initializeApp(firebaseConfig) : getApp()) : null;
 const auth = app ? getAuth(app) : null;
