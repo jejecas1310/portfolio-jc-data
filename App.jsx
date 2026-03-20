@@ -218,7 +218,7 @@ export default function App() {
         isOfferEligible: currentGiftCount < 10 
       });
       const subject = encodeURIComponent(`[Audit] Projet de ${contactForm.name}`);
-      window.location.href = `mailto:jc.data.solutions@outlook.fr?subject=${subject}&body=${encodeURIComponent(contactForm.message)}`;
+      window.location.href = `mailto:contact@mynexvia.fr?subject=${subject}&body=${encodeURIComponent(contactForm.message)}`;
       setIsSubmitted(true);
     } catch (err) {
         console.error("Submit error", err);
@@ -284,7 +284,7 @@ export default function App() {
             </div>
           ) : (
             <div className="space-y-12">
-              <div className="bg-slate-900 text-white p-10 rounded-[3rem] shadow-2xl border border-white/5 text-left flex flex-col md:flex-row justify-between items-center gap-8 text-white text-left">
+              <div className="bg-slate-900 text-white p-10 rounded-[3rem] shadow-2xl border border-white/5 flex flex-col md:flex-row justify-between items-center gap-8 text-left">
                 <div>
                     <h3 className="text-emerald-400 font-black uppercase text-xs tracking-widest mb-2 flex items-center gap-2"><Gift size={16}/> Contrôle de l'Offre</h3>
                     <p className="text-slate-400 italic text-sm">Ajustez le nombre de bénéficiaires manuellement.</p>
@@ -329,15 +329,15 @@ export default function App() {
                 <div className="hidden lg:block text-center text-slate-900">
                    <div className="relative bg-white rounded-[2.5rem] shadow-2xl border border-slate-100 p-8 transform rotate-2 inline-block">
                     <div className="grid grid-cols-2 gap-4">
-                      <div className="bg-emerald-50 rounded-2xl p-6 text-center text-slate-900 text-center">
-                        <Clock className="text-emerald-600 w-6 h-6 mb-2 mx-auto text-center" />
-                        <div className="text-2xl font-black italic text-center">-95%</div>
-                        <div className="text-[10px] text-emerald-800 font-bold uppercase text-center font-black">Temps manuel</div>
+                      <div className="bg-emerald-50 rounded-2xl p-6 text-center text-slate-900">
+                        <Clock className="text-emerald-600 w-6 h-6 mb-2 mx-auto" />
+                        <div className="text-2xl font-black italic">-95%</div>
+                        <div className="text-[10px] text-emerald-800 font-bold uppercase">Temps manuel</div>
                       </div>
                       <div className="bg-slate-900 rounded-2xl p-6 text-white text-center">
-                        <ShieldCheck className="text-emerald-400 w-6 h-6 mb-2 mx-auto text-center text-emerald-400" />
-                        <div className="text-2xl font-black italic text-center text-white">100%</div>
-                        <div className="text-[10px] text-slate-400 font-bold uppercase tracking-tighter text-center font-black">Données Fiables</div>
+                        <ShieldCheck className="text-emerald-400 w-6 h-6 mb-2 mx-auto" />
+                        <div className="text-2xl font-black italic">100%</div>
+                        <div className="text-[10px] text-slate-400 font-bold uppercase tracking-tighter">Données Fiables</div>
                       </div>
                     </div>
                   </div>
@@ -368,7 +368,7 @@ export default function App() {
                   <div className="inline-flex items-center gap-2 bg-amber-500 text-slate-900 px-4 py-1.5 rounded-full text-xs font-black uppercase mb-6 animate-pulse text-left text-slate-900"><Timer size={14} /> Livraison express disponible</div>
                   <h2 className="text-base font-bold text-amber-400 uppercase tracking-widest mb-3 italic text-left">Forfaits d'Intervention</h2>
                   <p className="text-3xl lg:text-5xl font-black mb-6 uppercase tracking-tighter italic text-left text-white">Solutions Prêtes à l'Emploi</p>
-                  <p className="text-slate-400 max-w-2xl border-l-4 border-amber-400 pl-6 text-left italic leading-relaxed text-white font-bold">Pour des besoins ciblés et urgents, j'ai standardisé ces prestations sur ComeUp.</p>
+                  <p className="text-slate-400 max-w-2xl border-l-4 border-amber-400 pl-6 text-left italic leading-relaxed font-bold">Pour des besoins ciblés et urgents, j'ai standardisé ces prestations sur ComeUp.</p>
                 </div>
                 <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6 text-slate-900 text-left">
                   {standardServices.map((s) => (
@@ -452,10 +452,10 @@ export default function App() {
             <div>
               <h2 className="text-4xl font-bold mb-6 tracking-tight font-black uppercase leading-tight text-left text-white font-black text-white text-left">Optimisez votre gestion. <br/><span className="text-emerald-500 underline decoration-emerald-500/20 font-black text-left">Commencez dès aujourd'hui.</span></h2>
               <div className="grid sm:grid-cols-2 gap-6 mt-12 text-white font-black text-left">
-                <a href="mailto:jc.data.solutions@outlook.fr" className="bg-white/5 p-6 rounded-2xl hover:bg-emerald-600 transition-all border border-white/5 text-left text-white text-left">
+                <a href="mailto:contact@mynexvia.fr" className="bg-white/5 p-6 rounded-2xl hover:bg-emerald-600 transition-all border border-white/5 text-left text-white text-left">
                     <Mail className="mb-4 text-emerald-400 group-hover:text-white" />
                     <div className="truncate text-xs font-black uppercase opacity-50 text-white text-left">Email</div>
-                    <div className="truncate text-sm font-black text-white text-left">jc.data.solutions@outlook.fr</div>
+                    <div className="truncate text-sm font-black text-white text-left">contact@mynexvia.fr</div>
                 </a>
                 <a href="https://www.linkedin.com/in/j%C3%A9r%C3%B4me-cassier-511601324/" target="_blank" rel="noopener noreferrer" className="bg-white/5 p-6 rounded-2xl hover:bg-blue-700 transition-all border border-white/5 text-left text-white text-left">
                     <Linkedin className="mb-4 text-blue-400 group-hover:text-white" />
