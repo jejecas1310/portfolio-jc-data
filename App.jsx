@@ -74,7 +74,7 @@ const DetailsTemplate = ({ title, subtitle, description, icon: Icon, examples, c
           {examples.map((ex, i) => (
             <div key={i} className="flex flex-col md:flex-row gap-8 items-start">
               <div className={`w-12 h-12 bg-${colorClass}-500 rounded-2xl flex items-center justify-center flex-shrink-0 shadow-lg`}><Layout size={24} className="text-white" /></div>
-              <div className="flex-1">
+              <div className="flex-1 text-left text-white">
                 <h4 className={`text-xl font-bold mb-3 text-${colorClass}-400 uppercase tracking-tighter italic`}>{i + 1}. {ex.title}</h4>
                 <p className="text-slate-400 leading-relaxed mb-4 italic">"{ex.context}"</p>
                 <div className="bg-white/5 p-6 rounded-2xl border border-white/10 text-white text-left">
@@ -154,7 +154,7 @@ export default function App() {
     return () => { unsubGift(); unsubAi(); };
   }, [user]);
 
-  // Leads Admin
+  // Admin Leads
   useEffect(() => {
     if (!user || !db || currentPage !== 'admin' || !isAdminAuthenticated) return;
     const leadsRef = collection(db, 'artifacts', currentAppId, 'public', 'data', 'contact_requests');
@@ -230,19 +230,19 @@ export default function App() {
   return (
     <div className="min-h-screen bg-slate-50 font-sans text-slate-900 scroll-smooth selection:bg-emerald-100">
       
-      {/* 1. BANDEAU OFFRE FLASH */}
+      {/* 1. BANDEAU */}
       <div className="bg-emerald-600 text-white h-10 px-4 text-center text-[10px] sm:text-xs font-black uppercase tracking-[0.15em] fixed top-0 w-full z-[100] flex items-center justify-center gap-3 shadow-lg">
         <Rocket size={14} className="animate-bounce" />
         <span>Offre de lancement : 50 templates VBA offerts aux 10 premiers clients !</span>
         <Flame size={14} className="text-amber-300 animate-pulse" />
       </div>
 
-      {/* 2. NAVIGATION (FIXEE TOP-10) */}
+      {/* 2. NAVIGATION */}
       <nav className={`fixed w-full z-50 transition-all duration-300 top-10 ${scrolled ? 'bg-white/95 backdrop-blur-md shadow-sm py-3 border-b border-slate-100' : 'bg-transparent py-5'}`}>
         <div className="max-w-7xl mx-auto px-6 flex justify-between items-center text-slate-900">
           <div className="flex items-center gap-2 cursor-pointer" onClick={() => setCurrentPage('home')}>
             <Database className="text-emerald-600 w-6 h-6" />
-            <span className="text-xl font-black tracking-tighter uppercase italic text-slate-900">JC.DATA<span className="text-emerald-600">.SOLUTIONS</span></span>
+            <span className="text-xl font-black tracking-tighter uppercase italic">JC.DATA<span className="text-emerald-600">.SOLUTIONS</span></span>
           </div>
           <div className="hidden md:flex items-center gap-6 text-sm font-bold">
             {['Services', 'Offres Express', 'Expertise', 'Engagement', 'Contact'].map((n, i) => (
@@ -277,14 +277,14 @@ export default function App() {
             <div className="max-w-md mx-auto bg-white p-12 rounded-[2.5rem] shadow-xl text-center text-slate-900">
               <Lock className="mx-auto mb-6 text-emerald-600" size={48} />
               <h2 className="text-2xl font-bold mb-6 italic uppercase">Accès Sécurisé</h2>
-              <form onSubmit={(e) => { e.preventDefault(); if(adminPassword === "ADMIN123") setIsAdminAuthenticated(true); else alert("Code incorrect"); }} className="space-y-4">
+              <form onSubmit={(e) => { e.preventDefault(); if(adminPassword === "ADMIN123") setIsAdminAuthenticated(true); else alert("Code incorrect"); }} className="space-y-4 text-left">
                 <input type="password" value={adminPassword} onChange={(e) => setAdminPassword(e.target.value)} placeholder="Code secret" className="w-full p-4 bg-slate-100 rounded-xl outline-none font-black italic text-slate-900" />
                 <button className="w-full bg-slate-900 text-white py-4 rounded-xl font-bold uppercase italic shadow-lg">Déverrouiller</button>
               </form>
             </div>
           ) : (
             <div className="space-y-12">
-              <div className="bg-slate-900 text-white p-10 rounded-[3rem] shadow-2xl border border-white/5 text-left flex flex-col md:flex-row justify-between items-center gap-8">
+              <div className="bg-slate-900 text-white p-10 rounded-[3rem] shadow-2xl border border-white/5 text-left flex flex-col md:flex-row justify-between items-center gap-8 text-white text-left">
                 <div>
                     <h3 className="text-emerald-400 font-black uppercase text-xs tracking-widest mb-2 flex items-center gap-2"><Gift size={16}/> Contrôle de l'Offre</h3>
                     <p className="text-slate-400 italic text-sm">Ajustez le nombre de bénéficiaires manuellement.</p>
@@ -318,7 +318,7 @@ export default function App() {
             <section className="relative pt-64 pb-20 lg:pt-80 lg:pb-32 overflow-hidden bg-white text-left text-slate-900">
               <div className="absolute top-0 right-0 -z-10 opacity-5 translate-x-1/4 -translate-y-1/4 text-emerald-600"><FileSpreadsheet size={600} /></div>
               <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-16 items-center">
-                <div className="text-left text-slate-900">
+                <div className="text-left">
                   <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-100 text-amber-700 text-[10px] font-black uppercase mb-6 border border-amber-200 italic shadow-sm">
                     <Gift size={12} /> Pack Cadeau Dispo ({currentGiftCount}/10)
                   </div>
@@ -335,9 +335,9 @@ export default function App() {
                         <div className="text-[10px] text-emerald-800 font-bold uppercase text-center font-black">Temps manuel</div>
                       </div>
                       <div className="bg-slate-900 rounded-2xl p-6 text-white text-center">
-                        <ShieldCheck className="text-emerald-400 w-6 h-6 mb-2 mx-auto text-center" />
+                        <ShieldCheck className="text-emerald-400 w-6 h-6 mb-2 mx-auto text-center text-emerald-400" />
                         <div className="text-2xl font-black italic text-center text-white">100%</div>
-                        <div className="text-[10px] text-slate-400 font-bold uppercase tracking-tighter text-center font-black text-white">Données Fiables</div>
+                        <div className="text-[10px] text-slate-400 font-bold uppercase tracking-tighter text-center font-black">Données Fiables</div>
                       </div>
                     </div>
                   </div>
@@ -350,9 +350,9 @@ export default function App() {
               <div className="max-w-7xl mx-auto px-6 text-left">
                 <div className="max-w-2xl mb-16 border-l-4 border-emerald-600 pl-8 text-slate-900">
                   <h2 className="text-base font-bold text-emerald-600 uppercase mb-3 italic">Domaines d'Intervention</h2>
-                  <p className="text-3xl lg:text-4xl font-bold italic text-left text-slate-900">Solutions d'ingénierie Excel <span className="whitespace-nowrap font-black text-left">sur-mesure.</span></p>
+                  <p className="text-3xl lg:text-4xl font-bold italic text-left text-slate-900 font-black">Solutions d'ingénierie Excel <span className="whitespace-nowrap font-black text-left">sur-mesure.</span></p>
                 </div>
-                <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 text-slate-900">
+                <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 text-slate-900 text-left">
                   <ServiceCard icon={Zap} title="VBA & Macros" desc="Suppression complète des tâches répétitives via macros programmées." onClick={() => setCurrentPage('details-automation')} color="emerald" />
                   <ServiceCard icon={BarChart3} title="Dashboards" desc="Conception de tableaux de bord interactifs pour vos KPI métiers." onClick={() => setCurrentPage('details-dashboards')} color="blue" />
                   <ServiceCard icon={Database} title="Data Management" desc="Power Query, structuration et nettoyage rigoureux de bases complexes." onClick={() => setCurrentPage('details-data')} color="indigo" />
@@ -361,7 +361,7 @@ export default function App() {
               </div>
             </section>
 
-            {/* EXPRESS (COMEUP) */}
+            {/* EXPRESS */}
             <section id="express" className="py-24 bg-slate-900 overflow-hidden relative scroll-mt-20 text-white text-left">
               <div className="max-w-7xl mx-auto px-6 relative z-10 text-left text-white text-left">
                 <div className="mb-16 text-white text-left">
@@ -372,12 +372,15 @@ export default function App() {
                 </div>
                 <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6 text-slate-900 text-left">
                   {standardServices.map((s) => (
-                    <div key={s.id} className="bg-white/5 border border-white/10 rounded-[2.5rem] p-6 flex flex-col hover:bg-white/10 transition-all group text-left text-white text-left">
-                      <div className="absolute top-0 right-0 bg-amber-500/20 text-amber-500 text-[10px] px-3 py-1 rounded-bl-2xl font-black text-left">{s.delay}</div>
+                    <div key={s.id} className="bg-white/5 border border-white/10 rounded-[2.5rem] p-6 flex flex-col hover:bg-white/10 transition-all group text-left text-white text-left relative overflow-hidden">
+                      <div className="absolute top-0 right-0 bg-amber-500/20 text-amber-500 px-3 py-1.5 rounded-bl-2xl text-right">
+                        <div className="text-[10px] font-black leading-tight">{s.delay}</div>
+                        <div className="text-[8px] opacity-80 leading-tight">selon votre option</div>
+                      </div>
                       <div className="w-12 h-12 bg-amber-500/10 rounded-xl flex items-center justify-center mb-6 text-amber-500 group-hover:scale-110 transition-transform text-left text-amber-500 text-left"><s.icon size={24} /></div>
                       <h3 className="text-lg font-bold text-white mb-3 leading-tight uppercase font-black text-left">{String(s.title)}</h3>
                       <p className="text-slate-400 text-xs mb-6 leading-relaxed italic text-left text-white/70">{String(s.description)}</p>
-                      <div className="pt-6 border-t border-white/10 flex items-center justify-between text-white text-left text-white text-left">
+                      <div className="pt-6 border-t border-white/10 flex items-center justify-between text-white text-left text-white text-left mt-auto">
                         <div className="text-xs text-white/50 italic text-left text-left">Dès <span className="block text-lg font-black text-amber-400 uppercase tracking-tighter text-left text-amber-400 text-left font-black">{String(s.price)}</span></div>
                         <a href={s.url} target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-amber-500 rounded-full flex items-center justify-center text-slate-900 shadow-lg hover:scale-110 transition-all text-center"><ShoppingBag size={20} /></a>
                       </div>
@@ -393,7 +396,7 @@ export default function App() {
                 <div className="mb-16 border-l-4 border-emerald-600 pl-8 text-slate-900">
                   <h2 className="text-base font-bold text-emerald-600 uppercase mb-3 italic text-left">Cas d'Expertise</h2>
                   <p className="text-3xl lg:text-4xl font-bold italic font-black text-left text-slate-900 text-left">Démonstration de Savoir-Faire</p>
-                  <p className="text-slate-500 mt-4 italic max-w-2xl text-left text-slate-500 font-black">Scénarios types de transformation de problématiques métier complexes en solutions techniques performantes.</p>
+                  <p className="text-slate-500 mt-4 italic max-w-2xl text-left text-slate-500 font-black">Scénarios types de transformation de problématiques métier en solutions techniques performantes.</p>
                 </div>
                 <div className="grid md:grid-cols-3 gap-8 text-left text-white text-slate-900">
                   {expertiseCases.map((p, i) => (
@@ -407,18 +410,18 @@ export default function App() {
               </div>
             </section>
 
-            {/* ENGAGEMENT / METHODOLOGY */}
+            {/* ENGAGEMENT / VALUES */}
             <section id="methodology" className="py-24 bg-emerald-600 text-white relative italic text-center scroll-mt-20 text-white">
-               <div className="absolute top-0 left-0 p-12 opacity-10 text-white text-left"><Quote size={120} /></div>
-               <div className="max-w-7xl mx-auto px-6 relative z-10 text-center text-white">
-                 <div className="mb-16 text-center text-white text-center">
+               <div className="absolute top-0 left-0 p-12 opacity-10 text-white text-left text-white text-left text-white"><Quote size={120} /></div>
+               <div className="max-w-7xl mx-auto px-6 relative z-10 text-center text-white text-center text-center">
+                 <div className="mb-16 text-center text-white text-center text-white">
                     <h2 className="text-base font-bold text-emerald-100 uppercase tracking-widest mb-3 italic text-center text-emerald-100 font-black">Valeurs</h2>
-                    <p className="text-3xl lg:text-5xl font-black italic tracking-tight uppercase text-center text-white font-black">Engagement & Qualité</p>
+                    <p className="text-3xl lg:text-5xl font-black italic tracking-tight uppercase text-center text-white font-black text-center text-white">Engagement & Qualité</p>
                  </div>
-                 <div className="grid md:grid-cols-3 gap-8 text-white text-left">
+                 <div className="grid md:grid-cols-3 gap-8 text-white text-left text-white text-left">
                     {methodology.map((m, i) => (
                       <div key={i} className="bg-white rounded-[2.5rem] p-10 shadow-2xl transform hover:-translate-y-2 transition-all text-slate-900 text-center flex flex-col items-center justify-center text-left text-slate-900">
-                        <div className="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-3xl flex items-center justify-center mb-6 shadow-sm text-emerald-600 text-center"><m.icon size={32} /></div>
+                        <div className="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-3xl flex items-center justify-center mb-6 shadow-sm text-emerald-600 text-center text-emerald-600"><m.icon size={32} /></div>
                         <h3 className="font-black text-slate-900 text-xl uppercase tracking-tighter mb-4 italic text-center text-slate-900 font-black">{String(m.title)}</h3>
                         <p className="text-slate-600 italic text-sm leading-relaxed text-center text-slate-600 font-black">"{String(m.content)}"</p>
                       </div>
@@ -428,7 +431,7 @@ export default function App() {
             </section>
           </>
         ) : (
-          currentPage.startsWith('details') && (
+          currentPage.startsWith('details-') && (
             <DetailsTemplate 
                 title={currentPage === 'details-automation' ? "Expertise VBA" : currentPage === 'details-dashboards' ? "Dashboards" : currentPage === 'details-data' ? "Gestion Data" : "Logiciels Dédiés"}
                 subtitle="Ingénierie Excel."
@@ -447,32 +450,32 @@ export default function App() {
         <div className="max-w-7xl mx-auto px-6 text-left">
           <div className="grid md:grid-cols-2 gap-16 mb-20 text-left text-white text-left">
             <div>
-              <h2 className="text-4xl font-bold mb-6 tracking-tight font-black uppercase leading-tight text-left text-white font-black text-white">Optimisez votre gestion. <br/><span className="text-emerald-500 underline decoration-emerald-500/20 font-black text-left">Commencez dès aujourd'hui.</span></h2>
+              <h2 className="text-4xl font-bold mb-6 tracking-tight font-black uppercase leading-tight text-left text-white font-black text-white text-left">Optimisez votre gestion. <br/><span className="text-emerald-500 underline decoration-emerald-500/20 font-black text-left">Commencez dès aujourd'hui.</span></h2>
               <div className="grid sm:grid-cols-2 gap-6 mt-12 text-white font-black text-left">
                 <a href="mailto:jc.data.solutions@outlook.fr" className="bg-white/5 p-6 rounded-2xl hover:bg-emerald-600 transition-all border border-white/5 text-left text-white text-left">
                     <Mail className="mb-4 text-emerald-400 group-hover:text-white" />
-                    <div className="truncate text-xs font-black uppercase opacity-50 text-white">Email</div>
+                    <div className="truncate text-xs font-black uppercase opacity-50 text-white text-left">Email</div>
                     <div className="truncate text-sm font-black text-white text-left">jc.data.solutions@outlook.fr</div>
                 </a>
                 <a href="https://www.linkedin.com/in/j%C3%A9r%C3%B4me-cassier-511601324/" target="_blank" rel="noopener noreferrer" className="bg-white/5 p-6 rounded-2xl hover:bg-blue-700 transition-all border border-white/5 text-left text-white text-left">
                     <Linkedin className="mb-4 text-blue-400 group-hover:text-white" />
-                    <div className="text-xs font-black uppercase opacity-50 text-white">LinkedIn</div>
-                    <div className="text-sm font-black italic uppercase text-white text-left">Profil Pro</div>
+                    <div className="text-xs font-black uppercase opacity-50 text-white text-left">LinkedIn</div>
+                    <div className="text-sm font-black italic uppercase text-white text-left text-left">Profil Pro</div>
                 </a>
                 <a href="https://comeup.com/fr/@jerome-cassier" target="_blank" rel="noopener noreferrer" className="bg-white/5 p-6 rounded-2xl hover:bg-amber-500 transition-all border border-white/5 text-left text-white text-left">
                     <ShoppingBag className="mb-4 text-amber-500 group-hover:text-white" />
-                    <div className="text-xs font-black uppercase opacity-50 text-white">ComeUp</div>
+                    <div className="text-xs font-black uppercase opacity-50 text-white text-left">ComeUp</div>
                     <div className="text-sm font-black italic uppercase text-white text-left text-left">Mes Prestations</div>
                 </a>
                 <a href="https://www.malt.fr/profile/jeromecassier" target="_blank" rel="noopener noreferrer" className="bg-white/5 p-6 rounded-2xl hover:bg-red-600 transition-all border border-white/5 text-left text-white text-left">
                     <UserCheck className="mb-4 text-red-500 group-hover:text-white" />
-                    <div className="text-xs font-black uppercase opacity-50 text-white italic">Malt</div>
+                    <div className="text-xs font-black uppercase opacity-50 text-white italic text-left">Malt</div>
                     <div className="text-sm font-black italic uppercase text-white text-left text-left">Freelance Pro</div>
                 </a>
                 {/* BOUTON ADMIN JAUNE AMBRE */}
                 <button onClick={() => setCurrentPage('admin')} className="bg-white/5 p-6 rounded-2xl hover:bg-amber-400/20 border border-white/5 text-left text-white text-left">
                     <Lock className="mb-4 text-amber-400 text-left text-amber-400" />
-                    <div className="text-xs font-black uppercase opacity-50 text-white text-left font-black">Espace Admin</div>
+                    <div className="text-xs font-black uppercase opacity-50 text-white text-left font-black text-white">Espace Admin</div>
                     <div className="text-sm font-black italic uppercase text-white text-left text-left font-black text-white">🔒 Administration</div>
                 </button>
               </div>
@@ -509,7 +512,7 @@ export default function App() {
 
       {/* IA MODAL */}
       {isModalOpen && (
-        <div className="fixed inset-0 z-[200] flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm text-slate-900 italic text-left text-left">
+        <div className="fixed inset-0 z-[200] flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm text-slate-900 italic text-left text-left text-slate-900">
           <div className="bg-white w-full max-w-2xl rounded-[2.5rem] shadow-2xl overflow-hidden flex flex-col max-h-[90vh]">
             <div className="p-8 border-b border-slate-100 flex justify-between items-center bg-slate-50/50 text-slate-900 text-slate-900">
               <div className="text-left text-slate-900 text-left text-left font-black text-slate-900">
@@ -528,12 +531,12 @@ export default function App() {
                 aiUsageCount >= 3 ? (
                   <div className="text-center py-6 animate-in zoom-in duration-500 flex flex-col items-center text-slate-900">
                     <div className="w-20 h-20 bg-amber-100 text-amber-600 rounded-3xl flex items-center justify-center mx-auto mb-8 shadow-inner font-black text-center text-amber-600"><Gift size={40} /></div>
-                    <h3 className="text-3xl font-black text-slate-900 mb-4 tracking-tight text-center uppercase text-slate-900">L'IA a ses limites 🚀</h3>
-                    <p className="text-slate-600 mb-10 max-w-md mx-auto italic font-black leading-relaxed text-center text-slate-600">Votre projet mérite une expertise humaine directe.</p>
+                    <h3 className="text-3xl font-black text-slate-900 mb-4 tracking-tight text-center uppercase text-slate-900 text-center">L'IA a ses limites 🚀</h3>
+                    <p className="text-slate-600 mb-10 max-w-md mx-auto italic font-black leading-relaxed text-center text-slate-600 text-center">Votre projet mérite une expertise humaine directe.</p>
                     <button onClick={() => { setIsModalOpen(false); navigateToSection('contact'); }} className="bg-emerald-600 text-white px-8 py-5 rounded-2xl font-black text-xl hover:scale-105 transition-all shadow-xl shadow-emerald-100 flex items-center justify-center gap-3 w-full uppercase tracking-tighter italic text-white text-left text-left font-black text-center font-black">Réserver mon audit gratuit <ArrowRight /></button>
                   </div>
                 ) : (
-                  <div className="space-y-4 text-left font-black text-slate-900">
+                  <div className="space-y-4 text-left font-black text-slate-900 text-left">
                     <div className="flex items-center gap-2 text-emerald-600 font-bold text-xs uppercase italic font-black text-left"><Info size={14}/> Décrivez votre flux de travail actuel</div>
                     <textarea value={userInput} onChange={(e) => setUserInput(e.target.value)} className="w-full p-6 bg-slate-50 border-2 border-slate-100 rounded-2xl focus:border-emerald-500 outline-none text-lg min-h-[160px] italic font-black text-slate-900 text-left" placeholder="Ex: Chaque lundi, je fusionne 10 fichiers..."></textarea>
                     <button onClick={handleAiAction} disabled={isLoading || !userInput.trim()} className="w-full bg-slate-900 text-white py-5 rounded-2xl font-black text-lg hover:bg-emerald-600 transition-all flex items-center justify-center gap-3 shadow-lg uppercase tracking-tighter font-black italic text-white text-center font-black">
@@ -542,19 +545,19 @@ export default function App() {
                   </div>
                 )
               ) : (
-                <div className="space-y-6 text-left font-black text-slate-900 text-left text-left text-slate-900 text-left font-black text-slate-900">
-                  <div className="bg-emerald-50 p-8 rounded-[2rem] border border-emerald-100 whitespace-pre-wrap leading-relaxed shadow-sm text-sm italic font-black text-emerald-700 font-black text-emerald-700">
-                    <div className="text-emerald-700 font-bold mb-4 flex items-center gap-2 border-b border-emerald-100 pb-2 uppercase italic font-black text-left text-emerald-700 text-left font-black text-emerald-700 text-emerald-700"><Sparkles size={14}/> Analyse Préliminaire</div>
+                <div className="space-y-6 text-left font-black text-slate-900 text-left text-left text-slate-900 text-left font-black text-slate-900 text-left">
+                  <div className="bg-emerald-50 p-8 rounded-[2rem] border border-emerald-100 whitespace-pre-wrap leading-relaxed shadow-sm text-sm italic font-black text-emerald-700 font-black text-emerald-700 text-left">
+                    <div className="text-emerald-700 font-bold mb-4 flex items-center gap-2 border-b border-emerald-100 pb-2 uppercase italic font-black text-left text-emerald-700 text-left font-black text-emerald-700 text-emerald-700 text-left"><Sparkles size={14}/> Analyse Préliminaire</div>
                     {String(aiResult)}
                   </div>
-                  <div className="p-6 bg-slate-900 rounded-[2rem] text-white flex flex-col sm:flex-row items-center gap-6 shadow-xl font-black text-left">
+                  <div className="p-6 bg-slate-900 rounded-[2rem] text-white flex flex-col sm:flex-row items-center gap-6 shadow-xl font-black text-left text-white text-left">
                     <div className="flex-1 text-left text-white text-left">
-                        <div className="text-emerald-400 font-black uppercase text-xs tracking-widest mb-1 italic text-left text-emerald-400 font-black">Valider cette analyse ?</div>
-                        <p className="text-xs text-slate-400 italic leading-relaxed font-black text-left text-slate-400">Échangeons 15 minutes pour confirmer le budget et la faisabilité.</p>
+                        <div className="text-emerald-400 font-black uppercase text-xs tracking-widest mb-1 italic text-left text-emerald-400 font-black text-left">Valider cette analyse ?</div>
+                        <p className="text-xs text-slate-400 italic leading-relaxed font-black text-left text-slate-400 text-left">Échangeons 15 minutes pour confirmer le budget et la faisabilité.</p>
                     </div>
-                    <button onClick={() => { setIsModalOpen(false); navigateToSection('contact'); }} className="bg-emerald-600 text-white px-6 py-4 rounded-xl font-black text-sm uppercase flex items-center gap-2 hover:bg-emerald-500 transition-all whitespace-nowrap italic text-white text-center font-black"><MessageSquare size={16}/> Demander mon audit <ArrowRight size={16}/></button>
+                    <button onClick={() => { setIsModalOpen(false); navigateToSection('contact'); }} className="bg-emerald-600 text-white px-6 py-4 rounded-xl font-black text-sm uppercase flex items-center gap-2 hover:bg-emerald-500 transition-all whitespace-nowrap italic text-white text-center font-black text-center"><MessageSquare size={16}/> Demander mon audit <ArrowRight size={16}/></button>
                   </div>
-                  <button onClick={() => setAiResult("")} className="w-full py-3 text-slate-400 text-[10px] font-bold uppercase tracking-widest hover:text-slate-600 transition-colors italic font-black text-center text-slate-400">Autre analyse ({3 - aiUsageCount} restantes)</button>
+                  <button onClick={() => setAiResult("")} className="w-full py-3 text-slate-400 text-[10px] font-bold uppercase tracking-widest hover:text-slate-600 transition-colors italic font-black text-center text-slate-400 text-center">Autre analyse ({3 - aiUsageCount} restantes)</button>
                 </div>
               )}
             </div>
